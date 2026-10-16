@@ -1,16 +1,33 @@
 // Menu mobile
 const menuBtn = document.getElementById("menuBtn");
 const nav = document.getElementById("nav");
+const mobileMenu = window.matchMedia("(max-width: 1000px)");
 
-menuBtn.addEventListener("click", () => {
-  nav.classList.toggle("open");
-});
-
-document.querySelectorAll("#nav a").forEach(link => {
-  link.addEventListener("click", () => {
-    nav.classList.remove("open");
+if (menuBtn && nav) {
+  const setMenu = (open) => {
+    nav.classList.toggle("open", open);
+    menuBtn.setAttribute("aria-expanded", String(open));
+    menuBtn.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
+  };
+  menuBtn.setAttribute("aria-controls", "nav");
+  menuBtn.setAttribute("type", "button");
+  setMenu(false);
+  menuBtn.addEventListener("click", () => setMenu(!nav.classList.contains("open")));
+  nav.querySelectorAll("a").forEach(link => link.addEventListener("click", () => setMenu(false)));
+  document.addEventListener("click", event => {
+    if (!nav.contains(event.target) && !menuBtn.contains(event.target)) setMenu(false);
   });
-});
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && nav.classList.contains("open")) {
+      setMenu(false);
+      menuBtn.focus();
+    }
+  });
+  mobileMenu.addEventListener("change", () => {
+    if (!mobileMenu.matches && nav.contains(document.activeElement)) menuBtn.blur();
+    setMenu(false);
+  });
+}
 
 // Année
 document.getElementById("year").textContent = new Date().getFullYear();
