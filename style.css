@@ -414,3 +414,27 @@ h3 { font-size: 1.15rem; margin-bottom: .5rem; }
   font-size: .8rem;
   margin-top: .4rem;
 }
+/* Exemples avant / après */
+.example-filters[hidden], .example-panel[hidden], .example-image-button [hidden] { display: none; }
+.example-filters { display:flex; flex-wrap:wrap; gap:.65rem; margin-bottom:2rem; }
+.example-filter { font:inherit; cursor:pointer; padding:.75rem 1.2rem; color:var(--text); background:var(--card); border:1px solid #41484e; border-radius:999px; }
+.example-filter[aria-pressed="true"] { background:var(--accent); border-color:var(--accent); color:#08120d; }
+.example-panel { margin-bottom:2rem; }
+.example-panel h3 { font-size:clamp(1.3rem,3vw,1.8rem); margin-bottom:1.5rem; }
+.example-pair { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.5rem; margin-bottom:1.5rem; }
+.example-figure { margin:0; min-width:0; padding:1rem; background:var(--card); border:1px solid #33383d; border-radius:var(--radius); }
+.example-badge { display:inline-block; margin-bottom:.8rem; font-weight:600; }
+.example-badge.apres { color:var(--accent); }
+.example-image-button { width:100%; display:block; padding:0; border:0; border-radius:10px; overflow:hidden; background:#111315; color:var(--muted); cursor:zoom-in; }
+.example-image-button:disabled { cursor:default; }
+.example-image-button img { display:block; width:100%; height:auto; max-height:420px; object-fit:contain; }
+.example-placeholder { display:flex; min-height:240px; padding:1rem; align-items:center; justify-content:center; overflow-wrap:anywhere; }
+.example-figure figcaption { margin-top:1rem; color:var(--muted); }
+.example-disclaimer { font-size:.85rem; color:var(--muted); }
+.example-filter:focus-visible,.example-image-button:focus-visible,.image-dialog-close:focus-visible { outline:3px solid var(--accent); outline-offset:4px; }
+.image-dialog { margin:auto; padding:1rem; background:var(--bg); color:var(--text); border:1px solid #41484e; border-radius:var(--radius); width:min(1100px,94vw); max-height:92dvh; overflow:auto; }
+.image-dialog::backdrop { background:rgb(0 0 0 / .85); }
+.image-dialog img { display:block; max-width:100%; max-height:75dvh; width:auto; height:auto; margin:auto; object-fit:contain; }
+.image-dialog-close { display:block; margin:0 0 1rem auto; padding:.65rem 1rem; background:var(--accent); color:#08120d; border:0; border-radius:8px; font:inherit; cursor:pointer; }
+.image-dialog-caption { margin-top:1rem; }
+@media(max-width:700px) { .example-pair { grid-template-columns:1fr; } .example-filter { flex:1 1 auto; } }

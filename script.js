@@ -117,3 +117,54 @@ if (gainValue) {
 
   gainObserver.observe(gainValue);
 }
+// Exemples : filtres et agrandissement
+(() => {
+  const section = document.getElementById("demos");
+  if (!section) return;
+  const filters = section.querySelector(".example-filters");
+  const buttons = [...section.querySelectorAll(".example-filter")];
+  const panels = [...section.querySelectorAll(".example-panel")];
+  const select = (id) => {
+    buttons.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.example === id)));
+    panels.forEach(panel => { panel.hidden = panel.id !== `example-${id}`; });
+  };
+  if (filters && buttons.length) {
+    filters.hidden = false;
+    buttons.forEach(button => button.addEventListener("click", () => select(button.dataset.example)));
+    select(buttons[0].dataset.example);
+  }
+  const dialog = document.querySelector(".image-dialog");
+  let trigger = null;
+  if (dialog) {
+    dialog.querySelector(".image-dialog-close").addEventListener("click", () => dialog.close());
+    dialog.addEventListener("click", event => {
+      const rect = dialog.getBoundingClientRect();
+      if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close();
+    });
+    dialog.addEventListener("close", () => { if (trigger) trigger.focus(); });
+  }
+  section.querySelectorAll(".example-image-button").forEach(button => {
+    const img = button.querySelector("img");
+    const placeholder = button.querySelector(".example-placeholder");
+    const ready = () => {
+      if (!img.naturalWidth) return;
+      img.hidden = false;
+      placeholder.hidden = true;
+      button.disabled = false;
+    };
+    img.addEventListener("load", ready);
+    if (img.complete) ready();
+    button.addEventListener("click", () => {
+      if (!dialog || typeof dialog.showModal !== "function") {
+        window.open(img.src, "_blank", "noopener");
+        return;
+      }
+      trigger = button;
+      const large = dialog.querySelector("img");
+      large.src = img.currentSrc || img.src;
+      large.alt = img.alt;
+      dialog.querySelector(".image-dialog-caption").textContent = img.alt;
+      dialog.showModal();
+    });
+  });
+})();
