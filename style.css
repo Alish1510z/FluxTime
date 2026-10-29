@@ -438,3 +438,14 @@ h3 { font-size: 1.15rem; margin-bottom: .5rem; }
 .image-dialog-close { display:block; margin:0 0 1rem auto; padding:.65rem 1rem; background:var(--accent); color:#08120d; border:0; border-radius:8px; font:inherit; cursor:pointer; }
 .image-dialog-caption { margin-top:1rem; }
 @media(max-width:700px) { .example-pair { grid-template-columns:1fr; } .example-filter { flex:1 1 auto; } }
+
+/* Contact direct */
+.contact-direct { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; margin-bottom:2rem; }
+.contact-direct-card { display:flex; flex-direction:column; align-items:flex-start; gap:.5rem; min-width:0; padding:1.4rem; background:var(--card); border:1px solid #41484e; border-radius:var(--radius); color:var(--text); text-decoration:none; transition:border-color .2s ease; }
+.contact-direct-card:hover { border-color:var(--accent); }
+.contact-direct-card:focus-visible { outline:3px solid var(--accent); outline-offset:4px; }
+.contact-direct-label { font-size:.9rem; color:var(--muted); }
+.contact-direct-value { font-family:"Space Grotesk",sans-serif; font-size:clamp(1rem,2.4vw,1.25rem); font-weight:700; overflow-wrap:anywhere; }
+.contact-direct-action { color:var(--accent); font-size:.85rem; margin-top:auto; padding-top:.5rem; }
+.contact-form-title { margin-bottom:1rem; }
+@media(max-width:600px) { .contact-direct { grid-template-columns:1fr; } }
